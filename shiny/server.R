@@ -3,7 +3,7 @@ library(shiny)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
-  src_data <- read.csv("../data/src.csv")
+  src_data <- read.csv("data.csv")
   
   # Generate a summary of the data
   output$summary <- renderPrint({
