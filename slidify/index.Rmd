@@ -1,0 +1,68 @@
+---
+title       : Tomales Bay water temp model
+subtitle    : Data product class
+author      : Kirill Lebedev
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+--- &twocol
+
+## Overview
+
+*** {name: left}
+
+Provided model is a linear model that allows to predict water tempreture
+in Tomales Bay (Point Reyes, CA) based on wind, air temp and pressure.
+
+Tomales Bay is one of the warmest place in San Francisco Bay Area. 
+Provided model tries to predict water tempreture. This information could be really valuable for a good weekend escape ;)
+
+*** {name: right}
+
+```{r echo=FALSE, warning=FALSE,message=FALSE}
+library(ggmap)
+qmap("Tomales Bay", zoom = 11, maptype = "roadmap", source="google")
+```
+
+--- 
+
+## Data Source
+
+All the data for this model provided by the University of California, Davis, Bodega Marine Laboratory and a property of Laboratory. Data are subject of copyrigth.
+                          
+Source data can be found on: http://bml.ucdavis.edu/boon/data_access.html
+
+Model is built on hourly 2013 data of water tempreture, average wind air tempreture and barometric pressure. 
+                             
+* All tempreture is in Celsium. 
+* Wind is in mph. 
+* Barometric pressure is in millibars.
+
+---
+
+## Model
+
+Lets take a look into full model summary:
+
+```{r echo=FALSE, warning=FALSE,message=FALSE}
+data <- read.csv("../data/src.csv")
+model <- lm(water_temp ~ wind + air_temp + pressure, data = data)
+summary(model)
+```
+
+---
+
+## Prediction 
+
+Interactive model is available on:
+
+## https://drlebedev.shinyapps.io/tomalesbay
+
+
+Feel free to use it for your weekend trip if you are in Bay Area.
+
